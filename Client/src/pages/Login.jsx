@@ -5,6 +5,7 @@ import API from "../api/axios";
 import { toast } from "react-toastify";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useAuth } from "../../context/AuthContext";
+import OAuth from "../components/OAuth";
 
 const Login = () => {
 
@@ -58,17 +59,7 @@ return (
         </h2>
 
         {/* Login with Google */}
-        <div className="mb-4 flex justify-center">
-          <button className="flex items-center gap-2 border border-gray-300 text-gray-700 
-            py-2.5 px-5 rounded-md text-sm font-medium hover:bg-gray-100 transition">
-            <img
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
-              alt="Google"
-              className="w-5 h-5"
-            />
-            Login with Google
-          </button>
-        </div>
+        <OAuth/>
 
         {/* Or */}
         <p className="text-center text-gray-400 mb-3 relative before:absolute before:left-0 before:top-1/2 

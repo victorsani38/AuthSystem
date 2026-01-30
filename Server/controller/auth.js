@@ -20,6 +20,9 @@ export const signUp = async(req, res) => {
      return res.status(400).json({success:false, error:"password not match"});    
     }
     const isExist = await User.findOne({email});
+    if(isExist && isExist.authProvide === "google"){
+      return res.status(401).json({success:false, error:"This email is registered with Google. Use Google login."});   
+    }
     if(isExist){
     return res.status(401).json({success:false, error:"user already exist"});
     }
@@ -46,6 +49,50 @@ export const signUp = async(req, res) => {
       console.log(error.message)
      return res.status(500).json({success:false, message:"Internal server error"});
    }
+}
+
+export const googleAuth = async(req, res) => {
+    try{
+    const {name, email, pic} = req.body
+    if(!email || !name){
+     return res.status(400).json({success:false, error:"Name and email required"});  
+    }
+    let user = await User.findOne({email})
+    if(user&&user.authProvider === "google"){
+      generateAuthToken(res, user._id);
+     return res.status(200).json({success:false, 
+     message:"Google login successful",
+     user:{...user._doc, password:undefined},
+    });
+    }
+    if (user && user.authProvider === "local") {
+      return res.status(400).json({
+        success: false,
+        error: "This email is registered with email/password. Use that to login.",
+      });
+    }
+     user = await User.create({
+      name,
+      email,
+      pic,
+      authProvider: "google",
+      isVerified: true,
+    });
+
+    generateAuthToken(res, user._id);
+    return res.status(201).json({
+      success: true,
+      message: "Google signup successful",
+      user: { ...user._doc, password: undefined },
+    });
+    }
+    catch(error){
+     console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Google authentication failed",
+    });
+    }
 }
 export const resendVerificationOtp = async(req, res) => {
     try{

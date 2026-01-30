@@ -1,5 +1,5 @@
 import express from "express";
-import { forgotPassword, getUser, login, logout, resendVerificationOtp, resetPassword, signUp, updatePassword, updateUser, verifyAccount } from "../controller/auth.js";
+import { forgotPassword, getUser, googleAuth, login, logout, resendVerificationOtp, resetPassword, signUp, updatePassword, updateUser, verifyAccount } from "../controller/auth.js";
 import { protect } from "../middleaware/authMiddleware.js";
 import multer from "multer";
 
@@ -8,6 +8,7 @@ const storage = multer.memoryStorage(); // or diskStorage for saving files
 const upload = multer({ storage });
 
 router.post("/sign-up", signUp);
+router.post("/google", googleAuth);
 router.post("/resend-otp", protect,resendVerificationOtp)
 router.post("/login", login); 
 router.post("/logout", logout);
