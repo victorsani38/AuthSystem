@@ -34,6 +34,7 @@ app.use(
   })
   
 )
+app.use('/api/users', authRoute)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -50,7 +51,7 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT 
 
 
-app.use('/api/users', authRoute)
+
 
 app.listen(port, ()=> {
     connectionDb()
