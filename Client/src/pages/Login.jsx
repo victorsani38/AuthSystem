@@ -24,14 +24,15 @@ const Login = () => {
         if(res.data.success){
         setUser(res.data.user)
         toast.success("login successfully")
-        window.location.href = "/dashboard";
+        //window.location.href = "/dashboard";
+         navigate("/dashboard");
         setLoading(false) 
         setData({email:"", password:""})
         }
         }
         catch(error){
         const errorCode = error.response?.data?.error;
-  if (errorCode === "user not verified") {
+  if (errorCode === "USER_NOT_VERIFIED") {
     toast.info("Please verify your email to continue");
     navigate("/verify-email");
   } else if (errorCode === "invalid credentials") {
