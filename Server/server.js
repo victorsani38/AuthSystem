@@ -4,8 +4,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { connectionDb } from "./db/connectionDb.js";
 import authRoute from "./route/authRoute.js" 
-import path from "path";
-import { fileURLToPath } from "url";
+// import path from "path";
+// import { fileURLToPath } from "url";
 
 const app = express();
 
@@ -35,18 +35,18 @@ app.use(
   
 )
 app.use('/api/users', authRoute)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
-if (process.env.NODE_ENV === "production") {
-  // Serve static files from React build
-  app.use(express.static(path.join(__dirname, "../client/dist")));
+// if (process.env.NODE_ENV === "production") {
+//   // Serve static files from React build
+//   app.use(express.static(path.join(__dirname, "../client/dist")));
 
-  // Catch-all for SPA routes
-  app.get("/*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-  });
-}
+//   // Catch-all for SPA routes
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+//   });
+// }
 
 const port = process.env.PORT 
 
