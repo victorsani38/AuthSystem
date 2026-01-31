@@ -132,12 +132,12 @@ export const login = async(req, res) => {
     if(!isMatch){
     return res.status(400).json({success:false, error:"invalid credentials"});
     }
-   if (!user.isVerified) {
-      return res.status(403).json({
-        success: false,
-        error: "USER_NOT_VERIFIED",
-      });
-    }
+  //  if (!user.isVerified) {
+  //     return res.status(403).json({
+  //       success: false,
+  //       error: "USER_NOT_VERIFIED",
+  //     });
+  //   }
     generateAuthToken(res, user._id)
     return res.status(200).json({success:true, 
         message:"user login successfully",
