@@ -12,8 +12,7 @@ const app = express();
 
 //const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://authsystem-6ppf.onrender.com",
+  "https://auth-client-orcin-three.vercel.app/",
 ]
 
 app.use(express.json());
