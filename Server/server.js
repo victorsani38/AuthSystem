@@ -12,7 +12,7 @@ const app = express();
 
 //const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 const allowedOrigins = [
-  "https://auth-client-orcin-three.vercel.app/",
+  "https://auth-client-orcin-three.vercel.app",
 ]
 
 app.use(express.json());
@@ -24,7 +24,7 @@ app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, origin)
+        callback(null, true)
       } else {
         callback(new Error("Not allowed by CORS"))
       }
