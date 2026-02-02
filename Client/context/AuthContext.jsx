@@ -18,6 +18,7 @@ export const ProtectContext = ({children}) => {
     }
     catch(error){
     setUser(null)
+    console.log("Profile fetch failed:", err.response?.data?.message || err.message);
     }finally{
         setLoading(false)
     }
