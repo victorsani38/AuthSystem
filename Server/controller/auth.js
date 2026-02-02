@@ -36,7 +36,7 @@ export const signUp = async(req, res) => {
         verificationTokenExpiresAt:Date.now() + 15 * 60 * 1000
     })
       await user.save()
-      generateAuthToken(res, user._id);
+     generateAuthToken(res, user._id);
 
       await sendVerificationEmail(user.name, user.email, verificationToken)
       return res.status(201).
@@ -132,12 +132,12 @@ export const login = async(req, res) => {
     if(!isMatch){
     return res.status(400).json({success:false, error:"invalid credentials"});
     }
-  //  if (!user.isVerified) {
-  //     return res.status(403).json({
-  //       success: false,
-  //       error: "USER_NOT_VERIFIED",
-  //     });
-  //   }
+   if (!user.isVerified) {
+      return res.status(403).json({
+        success: false,
+        error: "USER_NOT_VERIFIED",
+      });
+    }
     generateAuthToken(res, user._id)
     return res.status(200).json({success:true, 
         message:"user login successfully",
@@ -159,7 +159,11 @@ export const login = async(req, res) => {
 
 export const logout = async(req, res) => {
     try{
-    res.clearCookie("token")
+    res.clearCookie("token",{
+      httpOnly:true,
+      sameSite:"none",
+      secure:true
+    })
     return res.status(200).json({success:true, message:"user logout successfully"});
     }
     catch(error){

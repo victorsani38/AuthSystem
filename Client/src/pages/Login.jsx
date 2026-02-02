@@ -24,8 +24,8 @@ const Login = () => {
         if(res.data.success){
         setUser(res.data.user)
         toast.success("login successfully")
-        //window.location.href = "/dashboard";
-         navigate("/dashboard");
+        window.location.href = "/dashboard";
+        //navigate("/dashboard",{replace:true});
         setLoading(false) 
         setData({email:"", password:""})
         }
