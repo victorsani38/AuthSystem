@@ -13,8 +13,8 @@ export const ProtectContext = ({children}) => {
 
     const fetchUser = async() => {
     try{
-    const {data} = await API.get("/users/profile")
-    setUser(data.user)
+    const res = await API.get("/users/profile");
+    setUser(res.data.user)
     }
     catch(error){
     setUser(null)
