@@ -22,6 +22,10 @@ app.use(
     credentials: true, // required for cookies
   })
 );
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 app.use('/api/users', authRoute)
 const port = process.env.PORT 
