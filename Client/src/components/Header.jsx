@@ -12,6 +12,7 @@ const Header = ({ isHome, isDashboard }) => {
   const { user, logout } = useAuth();
 
   // Initials for verified users
+  const initials =
    user?.isVerified && typeof user?.name === "string"
     ? user.name
         .split(" ")
