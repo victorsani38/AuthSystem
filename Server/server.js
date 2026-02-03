@@ -15,19 +15,14 @@ app.use(express.urlencoded({extended:true}));
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true)
-      } else {
-        callback(new Error("Not allowed by CORS"))
-      }
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
     },
-    credentials: true,
-  })  
-)
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+    credentials: true, // required for cookies
+  })
+);
+
 app.use('/api/users', authRoute)
 const port = process.env.PORT 
 app.listen(port, ()=> {
