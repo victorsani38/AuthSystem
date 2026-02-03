@@ -44,7 +44,7 @@ const logout = async() => {
 }
 
 return(
-    <AuthContext.Provider value={{user, setUser, logout, loading, setLoading}}>
+    <AuthContext.Provider value={{user, setUser, logout, loading, setLoading, fetchUser}}>
         {children}
     </AuthContext.Provider>
 )
