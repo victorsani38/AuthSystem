@@ -13,7 +13,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false);
-    const {setUser, } = useAuth()
+    const {fetchUser } = useAuth()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -22,7 +22,7 @@ const Login = () => {
         const {email, password} = data
         const res = await API.post("/users/login", {email, password},{ withCredentials: true })
         if(res.data.success){
-        setUser(res.data.user)
+        await fetchUser();
         toast.success("login successfully")
         navigate("/dashboard",{replace:true});
         setLoading(false) 
