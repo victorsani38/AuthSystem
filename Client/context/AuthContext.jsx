@@ -13,7 +13,7 @@ export const ProtectContext = ({children}) => {
 
     const fetchUser = async() => {
     try{
-    const res = await API.get("/users/profile");
+    const res = await API.get("/users/profile", { withCredentials: true });
     setUser(res.data.user)
     }
     catch(error){
