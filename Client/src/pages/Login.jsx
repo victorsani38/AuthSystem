@@ -20,7 +20,7 @@ const Login = () => {
         setLoading(true)
         try{
         const {email, password} = data
-        const res = await API.post("/users/login", {email, password})
+        const res = await API.post("/users/login", {email, password},{ withCredentials: true })
         if(res.data.success){
         setUser(res.data.user)
         toast.success("login successfully")
