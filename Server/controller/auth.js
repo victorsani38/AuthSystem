@@ -60,7 +60,7 @@ export const googleAuth = async(req, res) => {
     let user = await User.findOne({email})
     if(user&&user.authProvider === "google"){
       generateAuthToken(res, user._id);
-     return res.status(200).json({success:false, 
+     return res.status(200).json({success:true, 
      message:"Google login successful",
      user:{...user._doc, password:undefined},
     });
@@ -143,8 +143,10 @@ export const login = async(req, res) => {
         message:"user login successfully",
         user: {
     _id: user._id,
+    name: user.name,
     email: user.email,
-    isVerified: user.isVerified
+    isVerified: user.isVerified,
+    pic: user.pic || null,
   }
     });
     }
